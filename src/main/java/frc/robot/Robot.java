@@ -8,8 +8,6 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import io.github.pseudoresonance.pixy2api.Pixy2;
 
 /**
@@ -20,7 +18,7 @@ import io.github.pseudoresonance.pixy2api.Pixy2;
  * project.
  */
 public class Robot extends TimedRobot {
-  Pixy2 pixy = Pixy2.createInstance(I2C);
+  Pixy2 pixy = Pixy2.createInstance(Pixy2.LinkType.I2C);
 
   @Override
   public void robotInit() {
