@@ -7,8 +7,10 @@
 
 package frc.robot;
 
+import java.util.ArrayList;
 import edu.wpi.first.wpilibj.TimedRobot;
 import io.github.pseudoresonance.pixy2api.Pixy2;
+import io.github.pseudoresonance.pixy2api.Pixy2CCC.Block;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -18,15 +20,23 @@ import io.github.pseudoresonance.pixy2api.Pixy2;
  * project.
  */
 public class Robot extends TimedRobot {
-  Pixy2 pixy = Pixy2.createInstance(Pixy2.LinkType.I2C);
+  Pixy2 pixy = Pixy2.createInstance(Pixy2.LinkType.SPI);
 
   @Override
   public void robotInit() {
-    
+    pixy.init();
   }
   
   @Override
   public void robotPeriodic() {
+    int result = pixy.getCCC().getBlocks(false, 1, 1);
+    //System.out.println(result);
+    if(result != -0){
+      ArrayList<Block> blocks = pixy.getCCC().getBlocks();
+      if(blocks.size() > 0){
+        System.out.println(blocks.get(0));
+      }
+    }
   }
 
   @Override
@@ -37,6 +47,11 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
     
+  }
+
+  @Override
+  public void teleopInit() {
+    //pixy.getVersionInfo().print();
   }
 
   @Override
